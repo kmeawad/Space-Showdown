@@ -1,2 +1,2 @@
 # Space-Showdown
-Mobile Multiplayer space shooter game 
+Mobile multiplayer space shooter game made in Unity
