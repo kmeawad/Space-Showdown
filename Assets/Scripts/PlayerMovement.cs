@@ -61,9 +61,6 @@ public class PlayerMovement : MonoBehaviour
     void moveCharacter(Vector2 direction)
     {
         player.Translate(direction * speed * Time.deltaTime);
-
-        //Rotate the ship as it moves to make movement look better
-        player.transform.rotation = Quaternion.Euler(direction.y * pitchMult, direction.x * rollMult, 0);
     }
 
 }

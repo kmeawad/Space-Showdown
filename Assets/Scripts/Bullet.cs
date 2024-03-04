@@ -7,14 +7,18 @@ public class Bullet : MonoBehaviour
     public float speed; // variable for the speed
     public float damage; // variable for how much damage the bullet deals
 
-    [Header("Set Dynamically")]
+    [Header("Set Cam Configs Dynamically")]
     public float camWidth;
     public float camHeight;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed);
+        // Get the forward vector of the object based on its rotation
+        Vector2 forward = transform.up; // Assuming the object's forward direction is its up direction
+
+        // Set the velocity of the Rigidbody2D
+        GetComponent<Rigidbody2D>().velocity = forward * speed;
 
         //get the camera height and width
         camHeight = Camera.main.orthographicSize;
@@ -22,7 +26,7 @@ public class Bullet : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         Vector3 pos = transform.position;
 
@@ -36,11 +40,10 @@ public class Bullet : MonoBehaviour
     //call function when collider is triggered
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject, 0.1f);
-
         //if the collision is triggered by the hero then destroy the enemy gameobject
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
+            Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerHealth>().health -= damage;
         }
     }

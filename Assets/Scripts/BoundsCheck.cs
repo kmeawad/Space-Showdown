@@ -32,9 +32,9 @@ public class BoundsCheck : MonoBehaviour
             pos.x = -camWidth + radius;
         }
 
-        if (pos.y > camHeight - radius)
+        if (pos.y > 0 - radius) // restrict player to half the map
         {
-            pos.y = camHeight - radius;
+            pos.y = 0 - radius;
         }
 
         if (pos.y < -camHeight + radius)
